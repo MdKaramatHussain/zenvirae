@@ -1,7 +1,7 @@
 export const SITE_INFO = {
   name: 'ZENVIRAE',
-  tagline: 'Luxury Fashion Redefined',
-  description: 'Discover timeless elegance and contemporary style',
+  tagline: 'Luxury Fashion For The Modern Era',
+  description: 'Curated designer wear, timeless jewelry and premium & accessories',
 }
 
 export const CAROUSEL_SLIDES = [
@@ -169,7 +169,7 @@ export const SHOES_PRODUCTS = [
     title: 'Sandals',
     description: 'Embellished leather sandals',
     price: 399,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/sandals.jpeg',
   },
 ]
 
@@ -179,35 +179,35 @@ export const JEWELLERY_PRODUCTS = [
     title: 'Gold Bracelet',
     description: '18k gold chain bracelet',
     price: 1200,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/gold-chain-bracelet.jpeg?height=600&width=450',
   },
   {
     id: 'j2',
     title: 'Diamond Ring',
     description: 'Solitaire diamond ring in platinum',
     price: 3500,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/diamond-ring.jpeg?height=600&width=450',
   },
   {
     id: 'j3',
     title: 'Pearl Earrings',
     description: 'Freshwater pearl drop earrings',
     price: 450,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/pearl-earrings.webp?height=600&width=450',
   },
   {
     id: 'j4',
     title: 'Watch',
     description: 'Swiss-made automatic watch',
     price: 5000,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/watch.webp?height=600&width=450',
   },
   {
     id: 'j5',
     title: 'Pendant Necklace',
     description: 'Gold pendant necklace with sapphire',
     price: 950,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/pendant-necklace.jpeg?height=600&width=450',
   },
 ]
 
@@ -217,35 +217,35 @@ export const ESSENTIALS_PRODUCTS = [
     title: 'White T-Shirt',
     description: 'Premium cotton crew neck t-shirt',
     price: 85,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/white-t-shirt.jpeg?height=600&width=450',
   },
   {
     id: 'e2',
     title: 'Denim Jeans',
     description: 'Slim fit raw denim jeans',
     price: 220,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/denim-jeans.jpeg?height=600&width=450',
   },
   {
     id: 'e3',
     title: 'Hoodie',
     description: 'Heavyweight cotton hoodie',
     price: 180,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/hoodie.jpeg?height=600&width=450',
   },
   {
     id: 'e4',
     title: 'Chino Pants',
     description: 'Classic beige chino pants',
     price: 150,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/chino-pants.jpeg?height=600&width=450',
   },
   {
     id: 'e5',
     title: 'Polo Shirt',
     description: 'Pique cotton polo shirt',
     price: 110,
-    image: '/placeholder.svg?height=600&width=450',
+    image: '/polo-shirt.jpeg?height=600&width=450',
   },
 ]
 

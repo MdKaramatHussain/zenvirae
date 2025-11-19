@@ -17,9 +17,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Zenvirae - Luxury Fashion',
-  description: 'Premium fashion ecommerce experience',
-  generator: 'v0.app',
+  title: 'Zenvirae - Luxury Fashion For The Modern Era',
+  description: 'Curated designer wear, timeless jewelry and premium & accessories',
+  generator: 'Md Karamat',
   icons: {
     icon: [
       {
