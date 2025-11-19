@@ -8,7 +8,7 @@ export const CAROUSEL_SLIDES = [
   {
     id: '1',
     image: '/luxury-fashion-model-elegant-dress.jpg',
-    title: 'Spring Collection 2024',
+    title: 'Spring Collection 2025',
     subtitle: 'Elegance Redefined',
     cta: 'Shop Now',
   },

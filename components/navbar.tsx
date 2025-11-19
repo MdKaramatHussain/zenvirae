@@ -33,20 +33,22 @@ export function Navbar() {
 
   const handleLogout = () => {
     dispatch(logout())
+    dispatch({ type: 'cart/clearCart' })
   }
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <h1 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              {SITE_INFO.name}
-            </h1>
-          </Link>
+        <div className="relative flex items-center justify-between h-16 md:h-20 md:grid md:grid-cols-[auto_1fr_auto]">
+          {/* Left: Logo + Nav Links */}
+          <div className="flex items-center gap-6">
+            <Link href="/" className="shrink-0">
+              <h1 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+                {SITE_INFO.name}
+              </h1>
+            </Link>
 
-          <div className="hidden md:flex items-center gap-6 ml-6 lg:ml-8 lg:gap-8">
+            <div className="hidden md:flex flex-none items-center gap-6 lg:gap-8">
             <Link href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Home
             </Link>
@@ -56,34 +58,38 @@ export function Navbar() {
             <Link href="/womens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Womens
             </Link>
-          </div>
-
-          <div className="hidden md:flex flex-1 max-w-md mx-4 lg:mx-8">
-            <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-              <input
-                type="search"
-                placeholder="Search luxury fashion..."
-                className="w-full pl-10 pr-4 py-2 bg-secondary/50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-              />
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+          {/* Center column: centered search */}
+          <div className="hidden md:flex justify-center">
+            <div className="w-full max-w-[520px] px-4 lg:px-8">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                <input
+                  type="search"
+                  placeholder="Search luxury fashion..."
+                  className="w-full pl-10 pr-4 py-2 bg-secondary/50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden md:flex items-center gap-2 shrink-0 min-w-48 justify-end">
             {!isAuthenticated ? (
-              <Button
+                <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleLogin}
-                className="text-sm font-medium min-w-[80px]"
+                className="text-sm font-medium min-w-24"
               >
                 Login
               </Button>
             ) : (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="gap-2 min-w-[80px]">
-                    <User className="h-4 w-4 flex-shrink-0" />
+                  <Button variant="ghost" size="sm" className="gap-2 min-w-20">
+                    <User className="h-4 w-4 shrink-0" />
                     <span className="text-sm font-medium truncate max-w-[100px]">{user?.name}</span>
                   </Button>
                 </DropdownMenuTrigger>
@@ -109,7 +115,7 @@ export function Navbar() {
               </DropdownMenu>
             )}
 
-            <Button variant="ghost" size="icon" className="relative flex-shrink-0">
+            <Button variant="ghost" size="icon" className="relative shrink-0">
               <ShoppingBag className="h-5 w-5" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-medium">
