@@ -52,10 +52,10 @@ export function Navbar() {
             <Link href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Home
             </Link>
-            <Link href="/mens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <Link href="/category/mens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Mens
             </Link>
-            <Link href="/womens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <Link href="/category/womens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Womens
             </Link>
             </div>

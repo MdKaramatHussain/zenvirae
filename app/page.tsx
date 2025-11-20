@@ -22,31 +22,31 @@ export default function Home() {
         <ProductRow 
           title="Men's Clothing" 
           products={MENS_PRODUCTS} 
-          link="/mens" 
+          link="/category/mens" 
         />
         
         <ProductRow 
           title="Women's Clothing" 
           products={WOMENS_PRODUCTS} 
-          link="/womens" 
+          link="/category/womens" 
         />
         
         <ProductRow 
           title="Shoes" 
           products={SHOES_PRODUCTS} 
-          link="/shoes" 
+          link="/category/shoes" 
         />
         
         <ProductRow 
           title="Jewellery" 
           products={JEWELLERY_PRODUCTS} 
-          link="/jewellery" 
+          link="/category/jewellery" 
         />
         
         <ProductRow 
           title="Essentials" 
           products={ESSENTIALS_PRODUCTS} 
-          link="/essentials" 
+          link="/category/essentials" 
         />
       </main>
       <Footer />

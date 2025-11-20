@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux'
 import { addToCart } from '@/store/cart-slice'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { useRouter } from 'next/navigation'
+import { addroute } from '@/store/route-slice'
 
 interface Product {
   id: string
@@ -13,6 +15,7 @@ interface Product {
   description: string
   price: number
   image: string
+  category: string
 }
 
 interface ProductCardProps {
@@ -21,8 +24,10 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const dispatch = useDispatch()
+  const router = useRouter()
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e?: React.MouseEvent) => {
+    e?.stopPropagation()
     dispatch(
       addToCart({
         id: product.id,
@@ -33,8 +38,23 @@ export function ProductCard({ product }: ProductCardProps) {
     )
   }
 
+  const handleNavigate = () => {
+    dispatch(
+      addroute({
+        id: product.id,
+        category: product.category,
+      })
+    )
+    product.title = product.title.replace(/\s+/g, '-').toLowerCase();
+    router.push(`/product/${product.title}`)
+  }
+
   return (
-    <Card className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300">
+    <Card
+      onClick={handleNavigate}
+      className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 cursor-pointer"
+      role="button"
+    >
       <CardContent className="p-0">
         <div className="relative aspect-[3/4] overflow-hidden bg-muted">
           <Image
@@ -54,7 +74,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.description}
           </p>
           <p className="font-serif text-xl font-bold text-primary">
-            INR {product.price.toLocaleString()}
+            ₹ {product.price.toLocaleString()}
           </p>
         </div>
         <Button
