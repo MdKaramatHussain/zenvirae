@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { ShoppingBag } from 'lucide-react'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '@/store/cart-slice'
+import { toast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { useRouter } from 'next/navigation'
@@ -36,6 +37,15 @@ export function ProductCard({ product }: ProductCardProps) {
         image: product.image,
       })
     )
+    try {
+      toast({
+        title: 'Product added to cart successfully!',
+        description: product.title,
+        duration: 2500,
+      })
+    } catch (err) {
+      // graceful fallback: do nothing
+    }
   }
 
   const handleNavigate = () => {

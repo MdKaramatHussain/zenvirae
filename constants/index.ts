@@ -327,3 +327,7 @@ export const MOCK_USER = {
   email: 'sophia@example.com',
   avatar: '/elegant-woman-avatar.jpg',
 }
+
+export const STORAGE_KEY = 'zenvirae-cart'
+
+export const toastDuration = 2200

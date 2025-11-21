@@ -38,9 +38,9 @@ export default async function CategoryPage({ params }: Params) {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                {products.map((p) => (
+                {products.map((p, index) => (
                 //   <Link key={p.id} href={`/product/${p.id}`} className="block">
-                    <ProductCard product={p} />
+                    <ProductCard product={p} key={index} />
                 //   </Link>
                 ))}
               </div>

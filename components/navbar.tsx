@@ -8,6 +8,7 @@ import { RootState } from '@/store/store'
 import { login, logout } from '@/store/auth-slice'
 import { SITE_INFO, MOCK_USER } from '@/constants'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +23,8 @@ export function Navbar() {
   const dispatch = useDispatch()
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth)
   const cartItems = useSelector((state: RootState) => state.cart.items)
-  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
+  // const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
+  const cartCount = cartItems.length
 
   useEffect(() => {
   }, [])
@@ -36,19 +38,22 @@ export function Navbar() {
     dispatch({ type: 'cart/clearCart' })
   }
 
+  const router = useRouter()
+  const goToCart = () => router.push('/cart')
+
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16 md:h-20 md:grid md:grid-cols-[auto_1fr_auto]">
           {/* Left: Logo + Nav Links */}
           <div className="flex items-center gap-6">
-            <Link href="/" className="shrink-0">
+            <Link href="/" className="shrink-1">
               <h1 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
                 {SITE_INFO.name}
               </h1>
             </Link>
 
-            <div className="hidden md:flex flex-none items-center gap-6 lg:gap-8">
+            <div className="hidden ml-1.5 md:flex flex-none items-center gap-7 lg:gap-8">
             <Link href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Home
             </Link>
@@ -103,8 +108,10 @@ export function Navbar() {
                     See Orders
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <ShoppingBag className="mr-2 h-4 w-4" />
-                    Cart {cartCount > 0 && `(${cartCount})`}
+                    <button onClick={goToCart} className="w-full text-left flex items-center gap-2">
+                      <ShoppingBag className="mr-2 h-4 w-4" />
+                      <span>Cart {cartCount > 0 && `(${cartCount})`}</span>
+                    </button>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
@@ -115,7 +122,7 @@ export function Navbar() {
               </DropdownMenu>
             )}
 
-            <Button variant="ghost" size="icon" className="relative shrink-0">
+            <Button variant="ghost" size="icon" className="relative shrink-0" onClick={goToCart}>
               <ShoppingBag className="h-5 w-5" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-medium">
@@ -138,6 +145,7 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               className="relative"
+              onClick={goToCart}
             >
               <ShoppingBag className="h-5 w-5" />
               {cartCount > 0 && (

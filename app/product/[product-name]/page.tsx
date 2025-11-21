@@ -12,10 +12,6 @@ import { ProductCard } from '@/components/product-card'
 import { CATEGORY_MAP, FEATURED_PRODUCTS, CATEGORIES } from '@/constants'
 import { RootState } from '@/store/store'
 
-interface Params {
-  params: { id: string }
-}
-
 export default function ProductPage() {
   const routeDetails = useSelector((state: RootState) => state.reduxRoute)
   const id = routeDetails?.id
@@ -29,9 +25,9 @@ export default function ProductPage() {
   const product = allProducts.find((p: any) => String(p.id) === String(id)) ?? null
   if (!product) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col" key={id}>
         <Navbar />
-        <main className="flex-1 py-20">
+        <main className="flex-1 py-15">
           <div className="max-w-3xl mx-auto px-4 text-center">
             <h2 className="text-2xl font-serif font-bold mb-4">Product Not Found</h2>
             <p className="text-muted-foreground mb-6">We couldn't find the product you requested.</p>
@@ -56,9 +52,9 @@ export default function ProductPage() {
   const similar = category ? (CATEGORY_MAP[category] ?? []).filter((p: any) => p.id !== product.id).slice(0, 5) : []
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" key={category}>
       <Navbar />
-      <main className="flex-1 py-12">
+      <main className="flex-1 py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div>
@@ -132,15 +128,18 @@ export default function ProductPage() {
 function AddActions({ product }: any) {
   const dispatch = useDispatch()
   const router = useRouter()
+  const { toast } = require('@/hooks/use-toast')
 
   const handleAdd = () => {
     dispatch(
       addToCart({ id: product.id, title: product.title, price: product.price, image: product.image })
     )
+    try {
+      toast({ title: 'Product added to cart successfully!', description: product.title, duration: 2500 })
+    } catch {}
   }
 
   const handleBuyNow = () => {
-    // optimistic add to cart then go to checkout placeholder
     dispatch(
       addToCart({ id: product.id, title: product.title, price: product.price, image: product.image })
     )
