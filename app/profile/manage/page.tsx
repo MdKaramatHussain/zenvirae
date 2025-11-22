@@ -8,8 +8,10 @@ import { Button } from '@/components/ui/button'
 import { updateProfile, addAddress, deleteAddress } from '@/store/auth-slice'
 import { useToast } from '@/hooks/use-toast'
 import { userList } from '@/constants'
+import { useRouter } from 'next/navigation'
 
 export default function ManageProfilePage() {
+  const router = useRouter()
   const dispatch = useDispatch()
   const { user, isLoggedIn } = useSelector((s: RootState) => s.auth)
   const { toast } = useToast()
@@ -123,7 +125,7 @@ export default function ManageProfilePage() {
             </div>
 
             <div className="pt-2">
-              <Button type="submit" className="rounded-xl">Save Changes</Button>
+              <Button type="submit" className="rounded-xl" onClick={() => router.push('/')}>Save Changes</Button>
             </div>
           </form>
         </section>
@@ -131,7 +133,7 @@ export default function ManageProfilePage() {
         {/* Right: Address Management */}
         <section className="rounded-2xl bg-gradient-to-br from-white/60 to-secondary/5 p-6 shadow-soft overflow-hidden">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold">Addresses</h3>
+            {user.addresses ?(<h3 className="text-lg font-semibold"> Addresses</h3>):null}
             <div>
               <Button variant="ghost" onClick={() => setShowAddForm((s) => !s)} className="rounded-xl">
                 {showAddForm ? 'Cancel' : 'Add New Address'}
