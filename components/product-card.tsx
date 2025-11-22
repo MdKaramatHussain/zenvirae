@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { useRouter } from 'next/navigation'
 import { addroute } from '@/store/route-slice'
+import { toastDuration } from '@/constants'
 
 interface Product {
   id: string
@@ -41,7 +42,7 @@ export function ProductCard({ product }: ProductCardProps) {
       toast.success({
         title: 'Product added to cart successfully!',
         description: product.title,
-        duration: 2500,
+        duration: toastDuration,
       })
     } catch (err) {
       // graceful fallback

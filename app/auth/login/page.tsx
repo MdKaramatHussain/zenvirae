@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
 import { login } from "@/store/auth-slice"
-import { dummyUser, userList } from "@/constants"
+import { toastDuration, userList } from "@/constants"
 import { toast } from "@/hooks/use-toast"
 import Link from "next/link"
 
@@ -26,20 +26,20 @@ export default function LoginPage() {
       toast.success({
         title: "Login Successful!",
         description: `Welcome, ${user.name}`,
-        duration: 2500,
+        duration: toastDuration,
       })
       router.push("/")
     } else {
       toast.error({
         title: "Login Failed",
         description: "Invalid credentials. Please try again.",
-        duration: 2500,
+        duration: toastDuration,
       })
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+    <div className="py-20 flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md rounded-xl shadow-xl bg-gradient-to-br from-muted/60 to-background/80 backdrop-blur-lg p-8 border border-border/30">
         <h1 className="font-serif text-3xl font-bold text-center mb-6 text-foreground">Welcome Back</h1>
         <form className="space-y-6" onSubmit={handleLogin}>

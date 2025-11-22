@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { ProductCard } from '@/components/product-card'
-import { CATEGORY_MAP, FEATURED_PRODUCTS, CATEGORIES } from '@/constants'
+import { CATEGORY_MAP, FEATURED_PRODUCTS, CATEGORIES, toastDuration } from '@/constants'
 import { RootState } from '@/store/store'
 
 export default function ProductPage() {
@@ -27,7 +27,6 @@ export default function ProductPage() {
   if (!product) {
     return (
       <div className="min-h-screen flex flex-col" key={id}>
-        <Navbar />
         <main className="flex-1 py-15">
           <div className="max-w-3xl mx-auto px-4 text-center">
             <h2 className="text-2xl font-serif font-bold mb-4">Product Not Found</h2>
@@ -37,7 +36,6 @@ export default function ProductPage() {
             </Link>
           </div>
         </main>
-        <Footer />
       </div>
     )
   }
@@ -54,7 +52,6 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen flex flex-col" key={category}>
-      <Navbar />
       <main className="flex-1 py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
@@ -121,7 +118,6 @@ export default function ProductPage() {
           )}
         </div>
       </main>
-      <Footer />
     </div>
   )
 }
@@ -135,7 +131,7 @@ function AddActions({ product }: any) {
       addToCart({ id: product.id, title: product.title, price: product.price, image: product.image })
     )
     try {
-      toast.success({ title: 'Product added to cart successfully!', description: product.title, duration: 2500 })
+      toast.success({ title: 'Product added to cart successfully!', description: product.title, duration: toastDuration })
     } catch {}
   }
 

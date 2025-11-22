@@ -14,7 +14,6 @@ import {
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-1">
         <HeroCarousel />
         <FeaturedProducts />
@@ -49,7 +48,6 @@ export default function Home() {
           link="/category/essentials" 
         />
       </main>
-      <Footer />
     </div>
   )
 }

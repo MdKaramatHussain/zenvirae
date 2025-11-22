@@ -101,7 +101,7 @@ export function Navbar() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => router.push('/profile/manage')}>
                     <UserCircle className="mr-2 h-4 w-4" />
                     Manage Profile
                   </DropdownMenuItem>
@@ -217,7 +217,7 @@ export function Navbar() {
               ) : (
                 <div className="space-y-1">
                   <div className="px-4 py-2 text-sm font-medium">{user?.name}</div>
-                  <Button variant="ghost" className="w-full justify-start">
+                  <Button variant="ghost" className="w-full justify-start" onClick={() => { setMobileMenuOpen(false); router.push('/profile/manage') }}>
                     <UserCircle className="mr-2 h-4 w-4" />
                     Manage Profile
                   </Button>

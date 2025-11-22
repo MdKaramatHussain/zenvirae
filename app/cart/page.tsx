@@ -71,7 +71,7 @@ export default function CartPage() {
   const handleClearCart = () => {
     dispatch(clearCart())
     try {
-      toast.error({ title: 'Cart cleared successfully!', duration: 2200 })
+      toast.error({ title: 'Cart cleared successfully!', duration: toastDuration })
     } catch {}
   }
 
@@ -79,7 +79,6 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden w-full max-w-full">
-      <Navbar />
       <main className="flex-1 py-12 w-full max-w-full">
         <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="font-serif text-3xl font-bold mb-8">Your Cart</h1>
@@ -99,7 +98,7 @@ export default function CartPage() {
                         <div className="w-20 h-24 relative rounded overflow-hidden bg-muted shrink-0">
                           <Image src={item.image || '/placeholder.svg'} alt={item.title} fill className="object-cover" />
                         </div>
-                        <button onClick={() => { dispatch(removeFromCart(item.id)); try { toast.error({ title: 'Item removed from cart', description: item.title, duration: 2200 }) } catch{} }} aria-label="Remove item" className="p-2 rounded-md hover:bg-secondary/50 transition self-start sm:self-auto">
+                        <button onClick={() => { dispatch(removeFromCart(item.id)); try { toast.error({ title: 'Item removed from cart', description: item.title, duration: toastDuration }) } catch{} }} aria-label="Remove item" className="p-2 rounded-md hover:bg-secondary/50 transition self-start sm:self-auto">
                           <Trash2 className="h-5 w-5 text-muted-foreground" />
                         </button>
                       </div>
@@ -167,7 +166,6 @@ export default function CartPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   )
 }

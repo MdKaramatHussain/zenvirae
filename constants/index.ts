@@ -329,6 +329,7 @@ export const MOCK_USER = {
 }
 
 export const STORAGE_KEY = 'zenvirae-cart'
+export const USER_KEY = 'zenvirae-users'
 
 export const toastDuration = 2200
 
@@ -336,11 +337,31 @@ export const toastDuration = 2200
 // Dummy user for authentication system
 export const dummyUser = {
   id: 1,
-  name: "Demo User",
-  email: "demo@fashionstore.com",
-  phone: "9876543210",
-  password: "Demo@123"
+  name: 'Demo User',
+  email: 'demo@fashionstore.com',
+  phone: '9876543210',
+  password: 'Demo@123',
+  addresses: [
+    {
+      id: 'addr-1',
+      fullName: 'Demo User',
+      phone: '9876543210',
+      pincode: '560001',
+      state: 'Karnataka',
+      city: 'Bengaluru',
+      house: '12B',
+      area: 'MG Road',
+    },
+  ],
 }
 
-// User list (initially contains only dummyUser)
-export const userList = [dummyUser]
+export const secondDummyUser = {
+  id: 2,
+  name: 'Ava Thompson',
+  email: 'ava@example.com',
+  phone: '9123456780',
+  password: 'Ava@1234',
+}
+
+// User list (initially contains a couple of dummy users so we can validate duplicate phones)
+export const userList = [dummyUser, secondDummyUser]
