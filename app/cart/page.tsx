@@ -69,14 +69,10 @@ export default function CartPage() {
   }
 
   const handleClearCart = () => {
-    dispatch(clearCart());
-    toastMessage('Cart cleared successfully!')
-}
-
-  const toastMessage = (message: string) => {
+    dispatch(clearCart())
     try {
-        toast({ title: message , duration: toastDuration }) }
-    catch{}
+      toast.error({ title: 'Cart cleared successfully!', duration: 2200 })
+    } catch {}
   }
 
   const total = subtotal + delivery - (promoDiscount ?? 0)
@@ -103,7 +99,7 @@ export default function CartPage() {
                         <div className="w-20 h-24 relative rounded overflow-hidden bg-muted shrink-0">
                           <Image src={item.image || '/placeholder.svg'} alt={item.title} fill className="object-cover" />
                         </div>
-                        <button onClick={() => { dispatch(removeFromCart(item.id)); try { toast({ title: 'Item removed from cart', description: item.title, duration: 2200 }) } catch{} }} aria-label="Remove item" className="p-2 rounded-md hover:bg-secondary/50 transition self-start sm:self-auto">
+                        <button onClick={() => { dispatch(removeFromCart(item.id)); try { toast.error({ title: 'Item removed from cart', description: item.title, duration: 2200 }) } catch{} }} aria-label="Remove item" className="p-2 rounded-md hover:bg-secondary/50 transition self-start sm:self-auto">
                           <Trash2 className="h-5 w-5 text-muted-foreground" />
                         </button>
                       </div>

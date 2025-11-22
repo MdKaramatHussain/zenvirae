@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { Search, ShoppingBag, User, Menu, X, LogOut, Package, UserCircle } from 'lucide-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store/store'
-import { login, logout } from '@/store/auth-slice'
-import { SITE_INFO, MOCK_USER } from '@/constants'
+import { logout } from '@/store/auth-slice'
+import { SITE_INFO } from '@/constants'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import {
@@ -21,33 +21,35 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const dispatch = useDispatch()
-  const { user, isAuthenticated } = useSelector((state: RootState) => state.auth)
+  const { user, isLoggedIn } = useSelector((state: RootState) => state.auth)
   const cartItems = useSelector((state: RootState) => state.cart.items)
   // const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
   const cartCount = cartItems.length
 
-  useEffect(() => {
-  }, [])
+  // useEffect(() => {
+  // }, [])
 
-  const handleLogin = () => {
-    dispatch(login(MOCK_USER))
+
+  const router = useRouter()
+  const handleLoginRedirect = () => {
+    router.push('/auth/login')
   }
 
   const handleLogout = () => {
     dispatch(logout())
     dispatch({ type: 'cart/clearCart' })
+    router.push('/')
   }
 
-  const router = useRouter()
   const goToCart = () => router.push('/cart')
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
+    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16 md:h-20 md:grid md:grid-cols-[auto_1fr_auto]">
           {/* Left: Logo + Nav Links */}
           <div className="flex items-center gap-6">
-            <Link href="/" className="shrink-1">
+            <Link href="/" className="shrink">
               <h1 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
                 {SITE_INFO.name}
               </h1>
@@ -81,14 +83,14 @@ export function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-2 shrink-0 min-w-48 justify-end">
-            {!isAuthenticated ? (
-                <Button
+            {!isLoggedIn ? (
+              <Button
                 variant="ghost"
                 size="sm"
-                onClick={handleLogin}
+                onClick={handleLoginRedirect}
                 className="text-sm font-medium min-w-24"
               >
-                Login
+                Login / Signup
               </Button>
             ) : (
               <DropdownMenu>
@@ -188,14 +190,14 @@ export function Navbar() {
               Home
             </Link>
             <Link 
-              href="/mens" 
+              href="/category/mens" 
               className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary/50 rounded-md transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Mens
             </Link>
             <Link 
-              href="/womens" 
+              href="/category/womens" 
               className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary/50 rounded-md transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -203,14 +205,14 @@ export function Navbar() {
             </Link>
             
             <div className="pt-2 mt-2 border-t border-border">
-              {!isAuthenticated ? (
+              {!isLoggedIn ? (
                 <Button
                   variant="ghost"
                   className="w-full justify-start"
-                  onClick={handleLogin}
+                  onClick={handleLoginRedirect}
                 >
                   <User className="mr-2 h-4 w-4" />
-                  Login
+                  Login / Signup
                 </Button>
               ) : (
                 <div className="space-y-1">

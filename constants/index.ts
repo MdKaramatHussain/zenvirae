@@ -331,3 +331,16 @@ export const MOCK_USER = {
 export const STORAGE_KEY = 'zenvirae-cart'
 
 export const toastDuration = 2200
+
+
+// Dummy user for authentication system
+export const dummyUser = {
+  id: 1,
+  name: "Demo User",
+  email: "demo@fashionstore.com",
+  phone: "9876543210",
+  password: "Demo@123"
+}
+
+// User list (initially contains only dummyUser)
+export const userList = [dummyUser]

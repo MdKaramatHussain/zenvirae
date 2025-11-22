@@ -1,15 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+
 export interface User {
-  id: string
+  id: number | string
   name: string
   email: string
+  phone: string
+  password: string
   avatar?: string
 }
 
+
 interface AuthState {
   user: User | null
-  isAuthenticated: boolean
+  isLoggedIn: boolean
 }
 
 const loadUserFromStorage = (): User | null => {
@@ -37,8 +41,9 @@ const saveUserToStorage = (user: User | null) => {
 
 const initialState: AuthState = {
   user: loadUserFromStorage(),
-  isAuthenticated: !!loadUserFromStorage(),
+  isLoggedIn: !!loadUserFromStorage(),
 }
+
 
 const authSlice = createSlice({
   name: 'auth',
@@ -46,16 +51,26 @@ const authSlice = createSlice({
   reducers: {
     login: (state, action: PayloadAction<User>) => {
       state.user = action.payload
-      state.isAuthenticated = true
+      state.isLoggedIn = true
       saveUserToStorage(action.payload)
     },
     logout: (state) => {
       state.user = null
-      state.isAuthenticated = false
+      state.isLoggedIn = false
       saveUserToStorage(null)
+    },
+    register: (state, action: PayloadAction<User>) => {
+      state.user = action.payload
+      state.isLoggedIn = true
+      saveUserToStorage(action.payload)
+    },
+    loadUserFromStorageAction: (state) => {
+      const user = loadUserFromStorage()
+      state.user = user
+      state.isLoggedIn = !!user
     },
   },
 })
 
-export const { login, logout } = authSlice.actions
+export const { login, logout, register, loadUserFromStorageAction } = authSlice.actions
 export default authSlice.reducer

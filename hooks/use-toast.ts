@@ -5,8 +5,8 @@ import * as React from 'react'
 
 import type { ToastActionElement, ToastProps } from '@/components/ui/toast'
 
-const TOAST_LIMIT = 1
-const TOAST_REMOVE_DELAY = 1000000
+const TOAST_LIMIT = 3
+const TOAST_REMOVE_DELAY = 3000
 
 type ToasterToast = ToastProps & {
   id: string
@@ -139,7 +139,7 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, 'id'>
 
-function toast({ ...props }: Toast) {
+const baseToast = ({ ...props }: Toast) => {
   const id = genId()
 
   const update = (props: ToasterToast) =>
@@ -167,6 +167,17 @@ function toast({ ...props }: Toast) {
     update,
   }
 }
+
+// Enhance baseToast with variant helpers: success, error, warning
+const toast = Object.assign(baseToast, {
+  success: (opts: Toast) =>
+    baseToast({ ...opts, variant: 'success', duration: opts.duration ?? 2500 }),
+  error: (opts: Toast) =>
+    baseToast({ ...opts, variant: 'error', duration: opts.duration ?? 2500 }),
+  warning: (opts: Toast) =>
+    baseToast({ ...opts, variant: 'warning', duration: opts.duration ?? 3000 }),
+  custom: (opts: Toast) => baseToast({ ...opts }),
+})
 
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)

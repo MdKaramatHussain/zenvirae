@@ -3,6 +3,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '@/store/cart-slice'
 import { Button } from '@/components/ui/button'
+import { toast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -128,14 +129,13 @@ export default function ProductPage() {
 function AddActions({ product }: any) {
   const dispatch = useDispatch()
   const router = useRouter()
-  const { toast } = require('@/hooks/use-toast')
 
   const handleAdd = () => {
     dispatch(
       addToCart({ id: product.id, title: product.title, price: product.price, image: product.image })
     )
     try {
-      toast({ title: 'Product added to cart successfully!', description: product.title, duration: 2500 })
+      toast.success({ title: 'Product added to cart successfully!', description: product.title, duration: 2500 })
     } catch {}
   }
 

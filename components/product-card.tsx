@@ -38,13 +38,13 @@ export function ProductCard({ product }: ProductCardProps) {
       })
     )
     try {
-      toast({
+      toast.success({
         title: 'Product added to cart successfully!',
         description: product.title,
         duration: 2500,
       })
     } catch (err) {
-      // graceful fallback: do nothing
+      // graceful fallback
     }
   }
 
