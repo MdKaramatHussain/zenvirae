@@ -48,7 +48,6 @@ export function ProductCard({ product }: ProductCardProps) {
       // graceful fallback
     }
   }
-
   const handleNavigate = () => {
     dispatch(
       addroute({
@@ -63,39 +62,45 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Card
       onClick={handleNavigate}
-      className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 cursor-pointer"
+      className="group overflow-visible border-border transition-shadow duration-300 cursor-pointer flex flex-col shadow-sm md:group-hover:shadow-xl"
       role="button"
     >
-      <CardContent className="p-0">
-        <div className="relative aspect-[3/4] overflow-hidden bg-muted">
-          <Image
-            src={product.image || "/placeholder.svg"}
-            alt={product.title}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-          />
+      {/* inner scaled wrapper: keeps layout cells same size while visually reducing card to 80% */}
+      <div className="w-full flex justify-center items-start md:h-105">
+        <div className="transform-gpu transition-transform duration-300 ease-out scale-92 md:scale-[0.82] md:group-hover:scale-[0.86] origin-top w-full">
+          <CardContent className="p-0 overflow-hidden">
+            <div className="relative overflow-hidden bg-muted aspect-3/4 w-full">
+              <Image
+                src={product.image || "/placeholder.svg"}
+                alt={product.title}
+                fill
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-500 will-change-transform"
+              />
+            </div>
+          </CardContent>
+          <CardFooter className="flex flex-col items-start gap-2 px-3 py-2">
+            <div className="w-full">
+              <h3 className="font-serif text-lg font-semibold text-foreground mb-0.5 text-balance line-clamp-2">
+                {product.title}
+              </h3>
+              <p className="text-sm text-muted-foreground mb-1 line-clamp-2">
+                {product.description.length > 30 ? product.description.slice(0, 30) + '...' : product.description}
+              </p>
+              <p className="font-serif text-xl font-bold text-primary mt-1">
+                ₹ {product.price.toLocaleString()}
+              </p>
+            </div>
+            <Button
+              onClick={handleAddToCart}
+              type="button"
+              className="w-full gap-2 bg-primary hover:bg-primary/90 text-primary-foreground shrink-0"
+            >
+              <ShoppingBag className="h-4 w-4" />
+              Add to Cart
+            </Button>
+          </CardFooter>
         </div>
-      </CardContent>
-      <CardFooter className="flex flex-col items-start gap-3 p-4">
-        <div className="w-full">
-          <h3 className="font-serif text-lg font-semibold text-foreground mb-1 text-balance">
-            {product.title}
-          </h3>
-          <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
-            {product.description}
-          </p>
-          <p className="font-serif text-xl font-bold text-primary">
-            ₹ {product.price.toLocaleString()}
-          </p>
-        </div>
-        <Button
-          onClick={handleAddToCart}
-          className="w-full gap-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-        >
-          <ShoppingBag className="h-4 w-4" />
-          Add to Cart
-        </Button>
-      </CardFooter>
+      </div>
     </Card>
   )
 }
