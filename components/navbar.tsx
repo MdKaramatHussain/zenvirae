@@ -105,7 +105,7 @@ export function Navbar() {
                     <UserCircle className="mr-2 h-4 w-4" />
                     Manage Profile
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => router.push('/orders')}>
                     <Package className="mr-2 h-4 w-4" />
                     See Orders
                   </DropdownMenuItem>
@@ -221,11 +221,11 @@ export function Navbar() {
                     <UserCircle className="mr-2 h-4 w-4" />
                     Manage Profile
                   </Button>
-                  <Button variant="ghost" className="w-full justify-start">
+                  <Button variant="ghost" className="w-full justify-start" onClick={() => { setMobileMenuOpen(false); router.push('/orders') }}>
                     <Package className="mr-2 h-4 w-4" />
                     See Orders
                   </Button>
-                  <Button variant="ghost" className="w-full justify-start">
+                  <Button variant="ghost" className="w-full justify-start" onClick={() => { setMobileMenuOpen(false); router.push('/cart') }}>
                     <ShoppingBag className="mr-2 h-4 w-4" />
                     Cart {cartCount > 0 && `(${cartCount})`}
                   </Button>

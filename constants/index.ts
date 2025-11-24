@@ -365,3 +365,58 @@ export const secondDummyUser = {
 
 // User list (initially contains a couple of dummy users so we can validate duplicate phones)
 export const userList = [dummyUser, secondDummyUser]
+
+export const ORDERS = [
+  {
+    id: 'ord-1001',
+    productId: 'f1',
+    title: 'Silk Evening Gown',
+    image: '/luxury-silk-evening-gown.jpg',
+    price: 1299,
+    quantity: 1,
+    orderDate: '2025-10-11',
+    status: 'Delivered',
+    deliveryDate: '2025-10-18',
+  },
+  {
+    id: 'ord-1002',
+    productId: 'm2',
+    title: 'Cashmere Sweater',
+    image: '/luxury-mens-cashmere-sweater.jpg',
+    price: 450,
+    quantity: 2,
+    orderDate: '2025-11-03',
+    status: 'In Transit',
+  },
+  {
+    id: 'ord-1003',
+    productId: 'j3',
+    title: 'Pearl Earrings',
+    image: '/pearl-earrings.webp?height=600&width=450',
+    price: 450,
+    quantity: 1,
+    orderDate: '2025-09-20',
+    status: 'Shipped',
+  },
+  {
+    id: 'ord-1004',
+    productId: 'w4',
+    title: 'Trench Coat',
+    image: '/luxury-trench-coat.jpg',
+    price: 1100,
+    quantity: 1,
+    orderDate: '2025-11-15',
+    status: 'Pending',
+  },
+  {
+    id: 'ord-1005',
+    productId: 's1',
+    title: 'Stiletto Heels',
+    image: '/luxury-stiletto-heels.jpg',
+    price: 699,
+    quantity: 1,
+    orderDate: '2025-10-25',
+    status: 'Delivered',
+    deliveryDate: '2025-10-31',
+  },
+]

@@ -105,7 +105,7 @@ export default function CartPage() {
 
                       <div className="flex-1 min-w-0 w-full">
                         <h3 className="font-medium text-lg truncate">{item.title}</h3>
-                        <div className="text-sm text-muted-foreground">{item.category ?? 'Uncategorized'}</div>
+                        <div className="text-sm text-muted-foreground">{item.title ?? ''}</div>
                         <div className="mt-2 flex items-center justify-between gap-1 flex-wrap">
                           <div className="flex items-center gap-2 border border-border rounded-md overflow-hidden">
                             <button onClick={() => dispatch(decreaseQuantity(item.id))} className="px-1.5 py-1 sm:px-3 sm:py-2 hover:bg-secondary/50">-</button>
@@ -121,7 +121,7 @@ export default function CartPage() {
               )}
             </div>
 
-            <aside className="lg:col-span-4 min-w-0 w-full max-w-full">
+            <aside className="lg:col-span-4 min-w-0 w-full max-w-full position-fixed lg:sticky lg:top-24">
               <div className="lg:sticky lg:top-24 w-full">
                 <div className="rounded-lg border border-border/40 p-4 sm:p-6 bg-background shadow-md min-w-0 w-full max-w-full overflow-hidden">
                   <h2 className="font-medium text-lg mb-4">Order Summary</h2>
