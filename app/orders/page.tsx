@@ -3,11 +3,12 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { ORDERS } from '@/constants'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
+import { addroute } from '@/store/route-slice'
 
 function getStatusClasses(status: string) {
   switch (status) {
@@ -28,6 +29,7 @@ export default function OrdersPage() {
   const router = useRouter()
   const { isLoggedIn } = useSelector((state: RootState) => state.auth)
   const { toast } = useToast()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -40,6 +42,33 @@ export default function OrdersPage() {
 
   if (!isLoggedIn) {
     return null
+  }
+
+    const handleNavigate = (order:any) => {
+      dispatch(
+        addroute({
+          id: order.productId,
+          category: order.category,
+        })
+      )
+      order.title = order.title.replace(/\s+/g, '-').toLowerCase();
+      router.push(`/product/${order.title}`)
+    }
+  
+  if (ORDERS.length === 0) {
+    return (
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <header className="mb-8">
+        <h2 className="text-3xl font-serif font-bold">My Orders</h2>
+        <p className="text-muted-foreground mt-2">A history of your recent purchases.</p>
+      </header>
+      <div className="rounded-lg border border-border/40 p-12 text-center">
+        <h2 className="text-2xl font-serif font-bold mb-4">You have no rders to Show</h2>
+        <p className="text-muted-foreground mb-6">Explore our latest collections and buy luxury pieces for you.</p>
+        <Button onClick={() => router.push('/')} className="bg-primary text-primary-foreground">Return to Home</Button>
+      </div>
+      </section>
+    )
   }
 
   return (
@@ -96,8 +125,8 @@ export default function OrdersPage() {
                   </div>
 
                   <div className="flex w-full flex-col gap-2 md:w-auto md:flex-row md:items-center md:gap-2">
-                    <Button variant="outline" size="sm" asChild className="w-full md:w-auto">
-                      <Link href={`/product/${order.productId}`}>View Product</Link>
+                    <Button variant="outline" size="sm" className="w-full md:w-auto" onClick={()=> handleNavigate(order)}>
+                      View Product
                     </Button>
 
                     <Button
