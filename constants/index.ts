@@ -64,6 +64,17 @@ export const FEATURED_PRODUCTS = [
   },
 ]
 
+export interface InterfaceProduct {
+  id: string
+  title: string
+  description: string
+  category: string
+  price: number,
+  image: string
+  createdAt: string
+  popularity: number,
+}
+
 export const MENS_PRODUCTS = [
   {
     id: 'm1',
@@ -474,11 +485,11 @@ export const ORDERS = [
 
 //searching constants
 export const allProducts = [
-    ...MENS_PRODUCTS,
-    ...WOMENS_PRODUCTS,
-    ...SHOES_PRODUCTS,
-    ...JEWELLERY_PRODUCTS,
-    ...ESSENTIALS_PRODUCTS,
+  ...MENS_PRODUCTS,
+  ...WOMENS_PRODUCTS,
+  ...SHOES_PRODUCTS,
+  ...JEWELLERY_PRODUCTS,
+  ...ESSENTIALS_PRODUCTS,
 ]
 
 export const priceRangeDefaults = { min: 0, max: 10000 }

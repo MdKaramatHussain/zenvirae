@@ -5,7 +5,7 @@ interface PageProps {
 }
 
 export default async function Page({ searchParams }: PageProps) {
-  const { query } = await searchParams  
-  const queryString = query ?? ""
+  const { query } = await searchParams 
+  const queryString = query ? query.replace('-', ' ').toLowerCase() : ''
   return <SearchPage queryParams={queryString} />
 }

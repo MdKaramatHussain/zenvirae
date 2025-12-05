@@ -6,7 +6,7 @@ import { Search, ShoppingBag, User, Menu, X, LogOut, Package, UserCircle } from 
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store/store'
 import { logout } from '@/store/auth-slice'
-import { SITE_INFO } from '@/constants'
+import { allProducts, InterfaceProduct, SITE_INFO } from '@/constants'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import {
@@ -26,47 +26,65 @@ export function Navbar() {
   // const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
   const cartCount = cartItems.length
   const [search, setsearch] = useState('')
+  const [showlist, setShowlist] = useState(false)
+
+  const productDesc = allProducts.filter(p => p.description.toLowerCase().includes(search.toLocaleLowerCase())).sort((a, b) => b.popularity - a.popularity)
+  const productTitles = allProducts.filter(p => p.title.toLowerCase().includes(search.toLocaleLowerCase())).sort((a, b) => b.popularity - a.popularity)
+  const productList : InterfaceProduct[] = productDesc.length > 0 ? productDesc : productTitles.length > 0 ? productTitles : []
   // useEffect(() => {
   // }, [])
 
 
   const router = useRouter()
   const handleLoginRedirect = () => {
+    setsearch('')
+    setShowlist(false)
     router.push('/auth/login')
   }
 
   const handleLogout = () => {
     dispatch(logout())
     dispatch({ type: 'cart/clearCart' })
+    setsearch('')
+    setShowlist(false)
     router.push('/')
   }
 
-  const goToCart = () => router.push('/cart')
-  const handleSearch = () => {
-    const query = search? '?query='+ search.replace(/\s+/g, '-').toLowerCase() : ''
+  const goToCart = () => {
+    setsearch('')
+    setShowlist(false)
+    router.push('/cart')
+  }
+  const handleSearch = (searchfilter: string) => {
+    const query = searchfilter ? '?query='+ searchfilter.replace(/\s+/g, '-').toLowerCase() : ''
+    setShowlist(false)
     router.push(`/search${query}`)
   }
-
+  const handleProductList = function (productTitle :string) {
+    setsearch(productTitle)
+    setShowlist(false)
+    handleSearch(productTitle)
+  }
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16 md:h-20 md:grid md:grid-cols-[auto_1fr_auto]">
           {/* Left: Logo + Nav Links */}
           <div className="flex items-center gap-6">
-            <Link href="/" className="shrink">
+            <Link href="/" onClick={(e)=>{setsearch(''); setShowlist(false) }} className="shrink">
               <h1 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-foreground">
                 {SITE_INFO.name}
               </h1>
             </Link>
 
             <div className="hidden ml-1.5 md:flex flex-none items-center gap-7 lg:gap-8">
-              <Link href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              <Link href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors"  onClick={(e)=>{setsearch(''); setShowlist(false) }}>
                 Home
               </Link>
-              <Link href="/category/mens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              <Link href="/category/mens" className="text-sm font-medium text-foreground hover:text-primary transition-colors"  onClick={(e)=>{setsearch(''); setShowlist(false) }}>
                 Mens
               </Link>
-              <Link href="/category/womens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              <Link href="/category/womens" className="text-sm font-medium text-foreground hover:text-primary transition-colors"  onClick={(e)=>{setsearch(''); setShowlist(false) }}>
                 Womens
               </Link>
             </div>
@@ -77,19 +95,34 @@ export function Navbar() {
             <div className="w-full max-w-[520px] px-4 lg:px-8">
               <div className="relative w-full">
                 <Button
-                  onClick={handleSearch}
+                  onClick={() => handleSearch(search)}
                   className="absolute left-3 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent focus:ring-0"
                 >
                   <Search className="h-4 w-4 text-muted-foreground pointer-events-none" tabIndex={0} />
                 </Button>
                 <input
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch(search)}
                   type="search"
                   placeholder="Search luxury fashion..."
                   value={search}
-                  onChange={(e) => setsearch(e.target.value)}
+                  onChange={(e) => {setsearch(e.target.value); setShowlist(search != "" && productList.length > 0)}}
                   className="w-full pl-12 pr-4 py-2 bg-secondary/50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 />
+                {showlist && (
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-border rounded-md shadow-lg z-50 overflow-hidden">
+                    <ul className="flex flex-col">
+                      {productList.slice(0, 10).map((product, index) => (
+                        <li
+                          key={product.id}
+                          onClick={(e)=>{e.preventDefault(); handleProductList(product.title)}}
+                          className="px-4 py-2 hover:bg-secondary cursor-pointer text-sm text-foreground transition-colors"
+                        >
+                          {product.title}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -183,13 +216,13 @@ export function Navbar() {
           <div className="md:hidden pb-4">
             <div className="relative">
               <Button
-                  onClick={handleSearch}
+                  onClick={()=>handleSearch(search)}
                   className="absolute left-0 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent focus:ring-0"
                 >
                 <Search className="h-4 w-4 text-muted-foreground pointer-events-none" />
               </Button>
               <input
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch(search)}
                 type="search"
                 placeholder="Search luxury fashion..."
                 value={search}
@@ -197,6 +230,21 @@ export function Navbar() {
                 className="w-full pl-10 pr-4 py-2 bg-secondary/50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
             </div>
+            {showlist && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-border rounded-md shadow-lg z-50 overflow-hidden">
+                  <ul className="flex flex-col">
+                    {productList.slice(0, 10).map((product) => (
+                      <li
+                        key={product.id}
+                          onClick={(e)=>{e.preventDefault(); handleProductList(product.title)}}
+                        className="px-4 py-2 hover:bg-secondary cursor-pointer text-sm text-foreground transition-colors"
+                      >
+                        {product.title}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+            )}
           </div>
         )}
 

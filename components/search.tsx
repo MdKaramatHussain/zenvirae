@@ -22,7 +22,7 @@ export default function SearchPage({queryParams}:{queryParams: string}) {
     }, [query, category, minPrice, maxPrice, sort])
 
     const filtered = useMemo(() => {
-        const q = query.trim().toLowerCase()
+        const q = query.trim()
 
         let list = allProducts.filter((p) => {
             // category filter
@@ -41,7 +41,6 @@ export default function SearchPage({queryParams}:{queryParams: string}) {
             // return flag.includes(q)
             return false
         })
-
         // sorting
         switch (sort) {
             case 'price-asc':
