@@ -25,7 +25,7 @@ export function Navbar() {
   const cartItems = useSelector((state: RootState) => state.cart.items)
   // const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
   const cartCount = cartItems.length
-
+  const [search, setsearch] = useState('')
   // useEffect(() => {
   // }, [])
 
@@ -42,6 +42,10 @@ export function Navbar() {
   }
 
   const goToCart = () => router.push('/cart')
+  const handleSearch = () => {
+    const query = search? '?query='+ search.replace(/\s+/g, '-').toLowerCase() : ''
+    router.push(`/search${query}`)
+  }
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 border-b border-border">
@@ -56,15 +60,15 @@ export function Navbar() {
             </Link>
 
             <div className="hidden ml-1.5 md:flex flex-none items-center gap-7 lg:gap-8">
-            <Link href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Home
-            </Link>
-            <Link href="/category/mens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Mens
-            </Link>
-            <Link href="/category/womens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Womens
-            </Link>
+              <Link href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Home
+              </Link>
+              <Link href="/category/mens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Mens
+              </Link>
+              <Link href="/category/womens" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Womens
+              </Link>
             </div>
           </div>
 
@@ -72,11 +76,19 @@ export function Navbar() {
           <div className="hidden md:flex justify-center">
             <div className="w-full max-w-[520px] px-4 lg:px-8">
               <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                <Button
+                  onClick={handleSearch}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent focus:ring-0"
+                >
+                  <Search className="h-4 w-4 text-muted-foreground pointer-events-none" tabIndex={0} />
+                </Button>
                 <input
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                   type="search"
                   placeholder="Search luxury fashion..."
-                  className="w-full pl-10 pr-4 py-2 bg-secondary/50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  value={search}
+                  onChange={(e) => setsearch(e.target.value)}
+                  className="w-full pl-12 pr-4 py-2 bg-secondary/50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 />
               </div>
             </div>
@@ -170,10 +182,18 @@ export function Navbar() {
         {searchOpen && (
           <div className="md:hidden pb-4">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+              <Button
+                  onClick={handleSearch}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent focus:ring-0"
+                >
+                <Search className="h-4 w-4 text-muted-foreground pointer-events-none" />
+              </Button>
               <input
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 type="search"
                 placeholder="Search luxury fashion..."
+                value={search}
+                onChange={(e) => setsearch(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 bg-secondary/50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
             </div>
@@ -182,28 +202,28 @@ export function Navbar() {
 
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border py-4 space-y-1">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary/50 rounded-md transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
-            <Link 
-              href="/category/mens" 
+            <Link
+              href="/category/mens"
               className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary/50 rounded-md transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Mens
             </Link>
-            <Link 
-              href="/category/womens" 
+            <Link
+              href="/category/womens"
               className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary/50 rounded-md transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Womens
             </Link>
-            
+
             <div className="pt-2 mt-2 border-t border-border">
               {!isLoggedIn ? (
                 <Button

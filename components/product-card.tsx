@@ -18,6 +18,8 @@ interface Product {
   price: number
   image: string
   category: string
+  createdAt: string
+  popularity: number
 }
 
 interface ProductCardProps {

@@ -72,6 +72,8 @@ export const MENS_PRODUCTS = [
     category: 'mens',
     price: 1499,
     image: '/luxury-mens-suit.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'm2',
@@ -80,6 +82,8 @@ export const MENS_PRODUCTS = [
     category: 'mens',
     price: 450,
     image: '/luxury-mens-cashmere-sweater.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'm3',
@@ -88,6 +92,8 @@ export const MENS_PRODUCTS = [
     category: 'mens',
     price: 899,
     image: '/luxury-leather-briefcase.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'm4',
@@ -96,6 +102,8 @@ export const MENS_PRODUCTS = [
     category: 'mens',
     price: 599,
     image: '/luxury-mens-oxford-shoes.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'm5',
@@ -104,6 +112,8 @@ export const MENS_PRODUCTS = [
     category: 'mens',
     price: 120,
     image: '/luxury-silk-tie.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
 ]
 
@@ -115,6 +125,8 @@ export const WOMENS_PRODUCTS = [
     category: 'womens',
     price: 899,
     image: '/luxury-cocktail-dress.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'w2',
@@ -123,6 +135,8 @@ export const WOMENS_PRODUCTS = [
     category: 'womens',
     price: 350,
     image: '/luxury-silk-blouse.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'w3',
@@ -131,6 +145,8 @@ export const WOMENS_PRODUCTS = [
     category: 'womens',
     price: 299,
     image: '/luxury-pencil-skirt.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'w4',
@@ -139,6 +155,8 @@ export const WOMENS_PRODUCTS = [
     category: 'womens',
     price: 1100,
     image: '/luxury-trench-coat.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'w5',
@@ -147,6 +165,8 @@ export const WOMENS_PRODUCTS = [
     category: 'womens',
     price: 450,
     image: '/luxury-evening-clutch.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
 ]
 
@@ -158,6 +178,8 @@ export const SHOES_PRODUCTS = [
     category: 'shoes',
     price: 699,
     image: '/luxury-stiletto-heels.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 's2',
@@ -166,6 +188,8 @@ export const SHOES_PRODUCTS = [
     category: 'shoes',
     price: 550,
     image: '/luxury-loafers.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 's3',
@@ -174,6 +198,8 @@ export const SHOES_PRODUCTS = [
     category: 'shoes',
     price: 750,
     image: '/luxury-ankle-boots.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 's4',
@@ -182,6 +208,8 @@ export const SHOES_PRODUCTS = [
     category: 'shoes',
     price: 499,
     image: '/luxury-designer-sneakers.jpg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 's5',
@@ -190,6 +218,8 @@ export const SHOES_PRODUCTS = [
     category: 'shoes',
     price: 399,
     image: '/sandals.jpeg',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
 ]
 
@@ -201,6 +231,8 @@ export const JEWELLERY_PRODUCTS = [
     category: 'jewellery',
     price: 1200,
     image: '/gold-chain-bracelet.jpeg?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'j2',
@@ -209,6 +241,8 @@ export const JEWELLERY_PRODUCTS = [
     category: 'jewellery',
     price: 3500,
     image: '/diamond-ring.jpeg?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'j3',
@@ -217,6 +251,8 @@ export const JEWELLERY_PRODUCTS = [
     category: 'jewellery',
     price: 450,
     image: '/pearl-earrings.webp?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'j4',
@@ -225,6 +261,8 @@ export const JEWELLERY_PRODUCTS = [
     category: 'jewellery',
     price: 5000,
     image: '/watch.webp?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'j5',
@@ -233,6 +271,8 @@ export const JEWELLERY_PRODUCTS = [
     category: 'jewellery',
     price: 950,
     image: '/pendant-necklace.jpeg?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
 ]
 
@@ -244,6 +284,8 @@ export const ESSENTIALS_PRODUCTS = [
     category: 'essentials',
     price: 85,
     image: '/white-t-shirt.jpeg?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'e2',
@@ -252,6 +294,8 @@ export const ESSENTIALS_PRODUCTS = [
     category: 'essentials',
     price: 220,
     image: '/denim-jeans.jpeg?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'e3',
@@ -260,6 +304,8 @@ export const ESSENTIALS_PRODUCTS = [
     category: 'essentials',
     price: 180,
     image: '/hoodie.jpeg?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'e4',
@@ -268,6 +314,8 @@ export const ESSENTIALS_PRODUCTS = [
     category: 'essentials',
     price: 150,
     image: '/chino-pants.jpeg?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
   {
     id: 'e5',
@@ -276,10 +324,13 @@ export const ESSENTIALS_PRODUCTS = [
     category: 'essentials',
     price: 110,
     image: '/polo-shirt.jpeg?height=600&width=450',
+    createdAt: '2025-10-21T10:00:00.000Z',
+    popularity: 87,
   },
 ]
 
 export const CATEGORIES = [
+  { slug: 'all', title: "All Products" },
   { slug: 'mens', title: "Men's Clothing" },
   { slug: 'womens', title: "Women's Clothing" },
   { slug: 'shoes', title: 'Shoes' },
@@ -419,4 +470,23 @@ export const ORDERS = [
     status: 'Delivered',
     deliveryDate: '2025-10-31',
   },
+]
+
+//searching constants
+export const allProducts = [
+    ...MENS_PRODUCTS,
+    ...WOMENS_PRODUCTS,
+    ...SHOES_PRODUCTS,
+    ...JEWELLERY_PRODUCTS,
+    ...ESSENTIALS_PRODUCTS,
+]
+
+export const priceRangeDefaults = { min: 0, max: 10000 }
+
+
+export const sortOptions = [
+  { id: 'price-asc', label: 'Price: Low → High' },
+  { id: 'price-desc', label: 'Price: High → Low' },
+  { id: 'newest', label: 'Newest First' },
+  { id: 'popularity', label: 'Popularity' },
 ]
